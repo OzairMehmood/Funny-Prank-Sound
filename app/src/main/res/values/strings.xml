@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Funny Prank Sounds</string>
+    <string name="english">English</string>
+    <string name="Urdu">Urdu</string>
+    <string name="Arabic">Arabic</string>
+    <string name="Spanish">Spanish</string>
+    <string name="Turkish">Turkish</string>
+    <string name="French">French</string>
+    <string name="Russian">Russian</string>
+    <string name="Hindi">Hindi</string>
+    <string name="Greek">Greek</string>
+    <string name="Portugesse">Portuguese</string>
 </resources>
