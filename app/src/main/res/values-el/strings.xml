@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Αστείοι Ήχοι Φάρσας</string>
+    <string name="english">Αγγλικά</string>
+    <string name="Urdu">Ουρντού</string>
+    <string name="Arabic">Αραβικά</string>
+    <string name="Spanish">Ισπανικά</string>
+    <string name="Turkish">Τουρκικά</string>
+    <string name="French">Γαλλικά</string>
+    <string name="Russian">Ρωσικά</string>
+    <string name="Hindi">Χίντι</string>
+    <string name="Greek">Ελληνικά</string>
+    <string name="Portugesse">Πορτογαλικά</string>
+    <string name="done">Έγινε</string>
+    <string name="choose_language">Επιλέξτε γλώσσα</string>
+    <string name="hello_blank_fragment">Γειά σου κενό θραύσμα</string>
+    <string name="hello_setting_fragment">Γειά σου θραύσμα ρυθμίσεων</string>
+    <string name="hello_prank_fragment">Γειά σου θραύσμα φάρσας</string>
+    <string name="hello_nigerian_fragment">Γειά σου θραύσμα από Νιγηρία</string>
+    <string name="hello_favourite_fragment">Γειά σου αγαπημένο θραύσμα</string>
+    <string name="Settings">Ρυθμίσεις</string>
+    <string name="more_app">Περισσότερες εφαρμογές</string>
+    <string name="rate_me">Αξιολόγησέ με</string>
+    <string name="share_app">Κοινοποίηση εφαρμογής</string>
+    <string name="privacy_poliecy">Πολιτική Απορρήτου</string>
+
+</resources>

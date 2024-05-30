@@ -1,2 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string name="app_name">Komik Şaka Sesleri</string>
+    <string name="english">İngilizce</string>
+    <string name="Urdu">Urduca</string>
+    <string name="Arabic">Arapça</string>
+    <string name="Spanish">İspanyolca</string>
+    <string name="Turkish">Türkçe</string>
+    <string name="French">Fransızca</string>
+    <string name="Russian">Rusça</string>
+    <string name="Hindi">Hintçe</string>
+    <string name="Greek">Yunanca</string>
+    <string name="Portugesse">Portekizce</string>
+    <string name="done">Bitti</string>
+    <string name="choose_language">Dil Seç</string>
+    <string name="hello_blank_fragment">Merhaba boş parça</string>
+    <string name="hello_setting_fragment">Merhaba ayarlar parçası</string>
+    <string name="hello_prank_fragment">Merhaba şaka parçası</string>
+    <string name="hello_nigerian_fragment">Merhaba Nijeryalı parça</string>
+    <string name="hello_favourite_fragment">Merhaba favori parça</string>
+    <string name="Settings">Ayarlar</string>
+    <string name="more_app">Daha Fazla Uygulama</string>
+    <string name="rate_me">Beni Oyla</string>
+    <string name="share_app">Uygulamayı Paylaş</string>
+    <string name="privacy_poliecy">Gizlilik Politikası</string>
+
+</resources>

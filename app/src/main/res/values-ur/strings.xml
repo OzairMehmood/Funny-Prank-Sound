@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">مضحکہ خیز مذاق کی آوازیں</string>
+    <string name="english">انگریزی</string>
+    <string name="Urdu">اردو</string>
+    <string name="Arabic">عربی</string>
+    <string name="Spanish">ہسپانوی</string>
+    <string name="Turkish">ترکی</string>
+    <string name="French">فرانسیسی</string>
+    <string name="Russian">روسی</string>
+    <string name="Hindi">ہندی</string>
+    <string name="Greek">یونانی</string>
+    <string name="Portugesse">پرتگالی</string>
+    <string name="done">ہو گیا</string>
+    <string name="choose_language">زبان منتخب کریں</string>
+    <string name="hello_blank_fragment">ہیلو خالی ٹکڑا</string>
+    <string name="hello_setting_fragment">ہیلو سیٹنگز ٹکڑا</string>
+    <string name="hello_prank_fragment">ہیلو مذاق ٹکڑا</string>
+    <string name="hello_nigerian_fragment">ہیلو نائجیریائی ٹکڑا</string>
+    <string name="hello_favourite_fragment">ہیلو پسندیدہ ٹکڑا</string>
+    <string name="Settings">ترتیبات</string>
+    <string name="more_app">مزید ایپ</string>
+    <string name="rate_me">میری درجہ بندی کریں</string>
+    <string name="share_app">ایپ شیئر کریں</string>
+    <string name="privacy_poliecy">رازداری کی پالیسی</string>
+
+</resources>

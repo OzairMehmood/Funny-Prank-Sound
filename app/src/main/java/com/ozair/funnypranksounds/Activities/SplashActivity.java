@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         new Handler().postDelayed(() -> {
-Intent intent=new Intent(this,MainActivity.class);
+Intent intent=new Intent(this, LanguageActivity.class);
 startActivity(intent);
 
             finish();

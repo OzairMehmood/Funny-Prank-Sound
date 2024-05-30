@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">मजेदार प्रैंक साउंड्स</string>
+    <string name="english">अंग्रेज़ी</string>
+    <string name="Urdu">उर्दू</string>
+    <string name="Arabic">अरबी</string>
+    <string name="Spanish">स्पेनिश</string>
+    <string name="Turkish">तुर्की</string>
+    <string name="French">फ्रेंच</string>
+    <string name="Russian">रूसी</string>
+    <string name="Hindi">हिंदी</string>
+    <string name="Greek">यूनानी</string>
+    <string name="Portugesse">पुर्तगाली</string>
+    <string name="done">पूर्ण</string>
+    <string name="choose_language">भाषा चुनें</string>
+    <string name="hello_blank_fragment">नमस्ते रिक्त खंड</string>
+    <string name="hello_setting_fragment">नमस्ते सेटिंग्स खंड</string>
+    <string name="hello_prank_fragment">नमस्ते प्रैंक खंड</string>
+    <string name="hello_nigerian_fragment">नमस्ते नाइजीरियाई खंड</string>
+    <string name="hello_favourite_fragment">नमस्ते पसंदीदा खंड</string>
+    <string name="Settings">सेटिंग्स</string>
+    <string name="more_app">अधिक ऐप</string>
+    <string name="rate_me">मुझे रेट करें</string>
+    <string name="share_app">ऐप साझा करें</string>
+    <string name="privacy_poliecy">गोपनीयता नीति</string>
 
 </resources>

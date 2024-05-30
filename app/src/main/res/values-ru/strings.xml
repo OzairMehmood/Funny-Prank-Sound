@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Забавные Звуки Розыгрышей</string>
+    <string name="english">Английский</string>
+    <string name="Urdu">Урду</string>
+    <string name="Arabic">Арабский</string>
+    <string name="Spanish">Испанский</string>
+    <string name="Turkish">Турецкий</string>
+    <string name="French">Французский</string>
+    <string name="Russian">Русский</string>
+    <string name="Hindi">Хинди</string>
+    <string name="Greek">Греческий</string>
+    <string name="Portugesse">Португальский</string>
+    <string name="done">Готово</string>
+    <string name="choose_language">Выберите язык</string>
+    <string name="hello_blank_fragment">Привет пустой фрагмент</string>
+    <string name="hello_setting_fragment">Привет фрагмент настроек</string>
+    <string name="hello_prank_fragment">Привет фрагмент розыгрыша</string>
+    <string name="hello_nigerian_fragment">Привет нигерийский фрагмент</string>
+    <string name="hello_favourite_fragment">Привет любимый фрагмент</string>
+    <string name="Settings">Настройки</string>
+    <string name="more_app">Больше приложений</string>
+    <string name="rate_me">Оцените меня</string>
+    <string name="share_app">Поделиться приложением</string>
+    <string name="privacy_poliecy">Политика конфиденциальности</string>
+
+</resources>

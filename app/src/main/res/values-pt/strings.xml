@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Sons de Pegadinhas Engraçadas</string>
+    <string name="english">Inglês</string>
+    <string name="Urdu">Urdu</string>
+    <string name="Arabic">Árabe</string>
+    <string name="Spanish">Espanhol</string>
+    <string name="Turkish">Turco</string>
+    <string name="French">Francês</string>
+    <string name="Russian">Russo</string>
+    <string name="Hindi">Hindi</string>
+    <string name="Greek">Grego</string>
+    <string name="Portugesse">Português</string>
+    <string name="done">Concluído</string>
+    <string name="choose_language">Escolha o idioma</string>
+    <string name="hello_blank_fragment">Olá fragmento em branco</string>
+    <string name="hello_setting_fragment">Olá fragmento de configurações</string>
+    <string name="hello_prank_fragment">Olá fragmento de pegadinha</string>
+    <string name="hello_nigerian_fragment">Olá fragmento nigeriano</string>
+    <string name="hello_favourite_fragment">Olá fragmento favorito</string>
+    <string name="Settings">Configurações</string>
+    <string name="more_app">Mais aplicativos</string>
+    <string name="rate_me">Avalie-me</string>
+    <string name="share_app">Compartilhar aplicativo</string>
+    <string name="privacy_poliecy">Política de Privacidade</string>
+
+</resources>

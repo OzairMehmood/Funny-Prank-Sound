@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Sonidos de Bromas Divertidas</string>
+    <string name="english">Inglés</string>
+    <string name="Urdu">Urdu</string>
+    <string name="Arabic">Árabe</string>
+    <string name="Spanish">Español</string>
+    <string name="Turkish">Turco</string>
+    <string name="French">Francés</string>
+    <string name="Russian">Ruso</string>
+    <string name="Hindi">Hindi</string>
+    <string name="Greek">Griego</string>
+    <string name="Portugesse">Portugués</string>
+    <string name="done">Hecho</string>
+    <string name="choose_language">Elija Idioma</string>
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+    <string name="hello_setting_fragment">Hola fragmento de configuración</string>
+    <string name="hello_prank_fragment">Hola fragmento de broma</string>
+    <string name="hello_nigerian_fragment">Hola fragmento nigeriano</string>
+    <string name="hello_favourite_fragment">Hola fragmento favorito</string>
+    <string name="Settings">Configuraciones</string>
+    <string name="more_app">Más aplicaciones</string>
+    <string name="rate_me">Califícame</string>
+    <string name="share_app">Compartir aplicación</string>
+    <string name="privacy_poliecy">Política de Privacidad</string>
+
+</resources>

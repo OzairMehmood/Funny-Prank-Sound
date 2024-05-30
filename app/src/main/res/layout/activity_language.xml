@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.LanguageActivity">
+
+    <RelativeLayout
+        android:id="@+id/toollay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/donebtn"
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="20dp"
+            app:cardBackgroundColor="@color/green"
+            app:cardCornerRadius="25dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/btndone"
+                android:background="@color/green"
+                android:text="@string/done"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold">
+
+            </androidx.appcompat.widget.AppCompatButton>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="60dp"
+            android:text="@string/choose_language"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold">
+
+        </TextView>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/langRec"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toollay"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>

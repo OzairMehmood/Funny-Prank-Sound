@@ -1,2 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Sons de Farces Amusantes</string>
+    <string name="english">Anglais</string>
+    <string name="Urdu">Ourdou</string>
+    <string name="Arabic">Arabe</string>
+    <string name="Spanish">Espagnol</string>
+    <string name="Turkish">Turc</string>
+    <string name="French">Français</string>
+    <string name="Russian">Russe</string>
+    <string name="Hindi">Hindi</string>
+    <string name="Greek">Grec</string>
+    <string name="Portugesse">Portugais</string>
+    <string name="done">Terminé</string>
+    <string name="choose_language">Choisir la langue</string>
+    <string name="hello_blank_fragment">Bonjour fragment vide</string>
+    <string name="hello_setting_fragment">Bonjour fragment de paramètres</string>
+    <string name="hello_prank_fragment">Bonjour fragment de farce</string>
+    <string name="hello_nigerian_fragment">Bonjour fragment nigérian</string>
+    <string name="hello_favourite_fragment">Bonjour fragment favori</string>
+    <string name="Settings">Paramètres</string>
+    <string name="more_app">Plus d\'applications</string>
+    <string name="rate_me">Évaluez-moi</string>
+    <string name="share_app">Partager l\'application</string>
+    <string name="privacy_poliecy">Politique de confidentialité</string>
+
+</resources>
