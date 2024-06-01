@@ -102,4 +102,8 @@
     <string name="Murife_Dont_Run">Murife Dont Run</string>
     <string name="Just_Dey_Play">Just Dey Play</string>
     <string name="Wetin_Be_This">Wetin Be This</string>
+    <string name="play_sound">Play Sound</string>
+    <string name="click_here_to_play">Click Here To Play</string>
+    <string name="tap_to_play">Tap to Play</string>
+    <string name="tap_to_pause">Tap to Pause</string>
 </resources>

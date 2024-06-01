@@ -40,15 +40,15 @@
                 android:background="@color/green_gradual_start_color">
 
                 <TextView
-                    android:layout_width="match_parent"
                     android:id="@+id/soundname"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:text="@string/play"
                     android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:textStyle="bold">
+                    android:textSize="12sp"
+                    >
 
                 </TextView>
             </RelativeLayout>
