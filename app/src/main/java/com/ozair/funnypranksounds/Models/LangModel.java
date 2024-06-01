@@ -3,11 +3,8 @@ package com.ozair.funnypranksounds.Models;
 public class LangModel {
     String Language;
     int countries;
-
-    public LangModel(String language, int countries) {
-        Language = language;
-        this.countries = countries;
-    }
+    int soundname;
+    int imgsrc;
 
     public String getLanguage() {
         return Language;
@@ -24,4 +21,33 @@ public class LangModel {
     public void setCountries(int countries) {
         this.countries = countries;
     }
+
+    public int getSoundname() {
+        return soundname;
+    }
+
+    public void setSoundname(int soundname) {
+        this.soundname = soundname;
+    }
+
+    public int getImgsrc() {
+        return imgsrc;
+    }
+
+    public void setImgsrc(int imgsrc) {
+        this.imgsrc = imgsrc;
+    }
+
+    public LangModel(String language, int countries) {
+        Language = language;
+        this.countries = countries;
+    }
+
+    public LangModel(int soundname,int imgsrc ) {
+        this.soundname = soundname;
+        this.imgsrc=imgsrc;
+
+    }
+
+
 }

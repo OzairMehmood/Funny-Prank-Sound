@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.ozair.funnypranksounds.R;
+import com.ozair.funnypranksounds.Utilz.SharedPrefs;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -18,7 +19,12 @@ public class SplashActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         new Handler().postDelayed(() -> {
-Intent intent=new Intent(this, LanguageActivity.class);
+            Intent intent;
+            if (SharedPrefs.isFirstTimeLanguageSelected(this)) {
+                intent = new Intent(this, MainActivity.class);
+            } else {
+                intent = new Intent(this, LanguageActivity.class);
+            }
 startActivity(intent);
 
             finish();

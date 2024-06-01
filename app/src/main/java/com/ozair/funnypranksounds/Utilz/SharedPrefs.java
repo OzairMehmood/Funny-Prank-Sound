@@ -59,4 +59,11 @@ public class SharedPrefs {
     public static String getWBTree(Context context) {
         return getInstance(context).getString(WB_TREE_URI, "");
     }
+    public static void setFirstTimeLanguageSelected(Context context, boolean isSelected) {
+        getInstance(context).edit().putBoolean("is_language_selected", isSelected).apply();
+    }
+
+    public static boolean isFirstTimeLanguageSelected(Context context) {
+        return getInstance(context).getBoolean("is_language_selected", false);
+    }
 }

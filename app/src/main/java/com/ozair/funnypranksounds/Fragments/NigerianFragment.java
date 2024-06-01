@@ -1,14 +1,30 @@
 package com.ozair.funnypranksounds.Fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ozair.funnypranksounds.Activities.LanguageActivity;
+import com.ozair.funnypranksounds.Adapters.LanguageAdapter;
+import com.ozair.funnypranksounds.Adapters.SoundsAdapter;
+import com.ozair.funnypranksounds.Models.LangModel;
 import com.ozair.funnypranksounds.R;
+import com.ozair.funnypranksounds.Repository.Repository;
+import com.ozair.funnypranksounds.appconstants;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +32,10 @@ import com.ozair.funnypranksounds.R;
  * create an instance of this fragment.
  */
 public class NigerianFragment extends Fragment {
+
+    private SoundsAdapter soundsAdapter;
+    private RecyclerView recyclerViewCourse;
+    ArrayList<LangModel> soundlist = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,6 +47,7 @@ public class NigerianFragment extends Fragment {
     private String mParam2;
 
     public NigerianFragment() {
+
         // Required empty public constructor
     }
 
@@ -57,10 +78,23 @@ public class NigerianFragment extends Fragment {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_nigerian, container, false);
+        View view = inflater.inflate(R.layout.fragment_nigerian, container, false);
+
+        recyclerViewCourse = view.findViewById(R.id.nigerianrec);
+        recyclerViewCourse.setLayoutManager(new GridLayoutManager(requireActivity(), 2));        soundsAdapter = new SoundsAdapter(requireActivity(), Repository.getSoundnsme());
+        recyclerViewCourse.setAdapter(soundsAdapter);
+        return view;
     }
+    public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(v, savedInstanceState);
+
+        // Assuming privacybtn functionality needs to be defined, add here if any
+    }
+
+
 }

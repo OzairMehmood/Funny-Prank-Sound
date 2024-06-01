@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.card.MaterialCardView;
+import com.ozair.funnypranksounds.Activities.LanguageActivity;
 import com.ozair.funnypranksounds.Activities.MainActivity;
 import com.ozair.funnypranksounds.R;
 import com.ozair.funnypranksounds.Utilz.SharedPrefs;
@@ -36,7 +37,7 @@ public class SettingFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    MaterialCardView moreappbtn,sharebtn,ratebtn,privacybtn;
+    MaterialCardView moreappbtn,sharebtn,ratebtn,privacybtn,Settingbtn;
 
     /**
      * Use this factory method to create a new instance of
@@ -79,6 +80,7 @@ public class SettingFragment extends Fragment {
         View v= inflater.inflate(R.layout.fragment_setting, container, false);
 moreappbtn=v.findViewById(R.id.moreappcard);
 sharebtn=v.findViewById(R.id.sharecard);
+Settingbtn=v.findViewById(R.id.settingcard);
 ratebtn=v.findViewById(R.id.RateMe);
 privacybtn=v.findViewById(R.id.privacycard);
 
@@ -106,6 +108,13 @@ privacybtn=v.findViewById(R.id.privacycard);
     public void onViewCreated(@NonNull View v, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(v, savedInstanceState);
 
+Settingbtn.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(requireActivity(), LanguageActivity.class);
+        startActivity(intent);
+    }
+});
         sharebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -6,25 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.SettingFragment">
 
-    <TextView
-        android:id="@+id/maintext"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content"
+        android:background="@color/appcolournew"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        />
+
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/Settings"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="bold">
-
-    </TextView>
+        android:textStyle="bold" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/moreappcard"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_below="@+id/maintext"
+        android:layout_below="@+id/toolbar"
         android:layout_margin="20dp"
         android:elevation="8dp"
         android:visibility="visible"
@@ -186,7 +196,7 @@
         android:id="@+id/privacycard"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_below="@+id/sharecard"
+        android:layout_below="@+id/settingcard"
         android:layout_margin="20dp"
         android:elevation="8dp"
         android:visibility="visible"
@@ -234,7 +244,61 @@
             </TextView>
 
         </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
 
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/settingcard"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@+id/sharecard"
+        android:layout_margin="20dp"
+        android:elevation="8dp"
+        android:visibility="visible"
+        app:cardCornerRadius="12dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/setting"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/settingimg">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/next4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/next">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/Language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toStartOf="@+id/next4"
+                android:layout_toEndOf="@+id/setting"
+                android:text="@string/Language"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>

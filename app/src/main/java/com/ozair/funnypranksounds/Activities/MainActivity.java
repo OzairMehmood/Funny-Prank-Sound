@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadnewfragment(new PrankFragment());
-
             }
         });
         findViewById(R.id.fvrtsounds).setOnClickListener(new View.OnClickListener() {
