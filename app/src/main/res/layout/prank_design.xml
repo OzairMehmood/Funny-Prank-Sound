@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="18dp"
+    android:elevation="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/catergorycard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+     >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:background="@color/appcolournew"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/fontimg"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/prank">
+
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/nextbtn"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/next">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/categoryname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_toStartOf="@+id/nextbtn"
+                android:layout_toEndOf="@+id/fontimg"
+                android:text=" "
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textColor="@color/white"
+                android:textStyle="bold">
+
+            </TextView>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</com.google.android.material.card.MaterialCardView>

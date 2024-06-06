@@ -57,6 +57,7 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:visibility="gone"
+            app:lottie_repeatCount="1000"
             android:elevation="5dp"
             app:lottie_autoPlay="true"
             app:lottie_rawRes="@raw/backanimation" >
@@ -93,5 +94,33 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/fvrtimg"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/fvrtimg">
+
+    </ImageView>
+    <ImageView
+        android:id="@+id/downloadimg"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/download">
+
+    </ImageView>
+
 
 </RelativeLayout>

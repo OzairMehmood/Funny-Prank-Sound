@@ -1,14 +1,24 @@
 package com.ozair.funnypranksounds.Fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ozair.funnypranksounds.Adapters.PrankAdapter;
+import com.ozair.funnypranksounds.Adapters.SoundsAdapter;
+import com.ozair.funnypranksounds.Models.LangModel;
 import com.ozair.funnypranksounds.R;
+import com.ozair.funnypranksounds.Repository.Repository;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +26,9 @@ import com.ozair.funnypranksounds.R;
  * create an instance of this fragment.
  */
 public class PrankFragment extends Fragment {
+    private PrankAdapter prankAdapter;
+    private RecyclerView recyclerViewCourse;
+    ArrayList<LangModel> soundlist = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -57,10 +70,16 @@ public class PrankFragment extends Fragment {
         }
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_prank, container, false);
+        View view= inflater.inflate(R.layout.fragment_prank, container, false);
+
+        recyclerViewCourse = view.findViewById(R.id.prankRec);
+        recyclerViewCourse.setLayoutManager(new LinearLayoutManager(requireActivity()));        prankAdapter = new PrankAdapter(getContext(), Repository.getCategoryName());
+        recyclerViewCourse.setAdapter(prankAdapter);
+        return view;
     }
 }

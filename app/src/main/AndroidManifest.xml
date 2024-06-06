@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
 
     <application
         android:allowBackup="true"
@@ -13,11 +20,14 @@
         android:theme="@style/Theme.FunnyPrankSounds"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.CategoryListActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.PlaySoundActivity"
             android:exported="false" />
         <activity
             android:name=".Activities.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".Activities.SplashActivity"
             android:exported="true">
@@ -29,7 +39,7 @@
         </activity>
         <activity
             android:name=".Activities.LanguageActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
