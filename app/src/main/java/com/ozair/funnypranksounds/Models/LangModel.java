@@ -3,10 +3,12 @@ package com.ozair.funnypranksounds.Models;
 public class LangModel {
     String Language,category,EmptyString;
     int countries;
-    int soundname;
-    int imgsrc,soundsrc;
+     String soundname;
+    int imgsrc;
+     int soundsrc;
     int categoryName;
-    public    String Key_Id,favStatus;
+    public  String Key_Id;
+    public  String favStatus;
 
 
 
@@ -17,7 +19,7 @@ public class LangModel {
         this.countries = countries;
     }
 
-    public LangModel(int soundname, int imgsrc, int soundsrc, String key_Id, String favStatus) {
+    public LangModel(String soundname, int imgsrc, int soundsrc, String key_Id, String favStatus) {
         this.soundname = soundname;
         this.imgsrc = imgsrc;
         this.soundsrc = soundsrc;
@@ -32,7 +34,7 @@ public class LangModel {
 
     }
 
-    public LangModel(String id, int title, int image, String favStatus) {
+    public LangModel(String id, String title, int image, String favStatus) {
         Key_Id = id;
         soundname=title;
         imgsrc=image;
@@ -40,7 +42,11 @@ public class LangModel {
 
     }
 
-    public String getKey_Id() {
+    public LangModel() {
+
+    }
+
+    public  String getKey_Id() {
         return Key_Id;
     }
 
@@ -48,7 +54,7 @@ public class LangModel {
         Key_Id = key_Id;
     }
 
-    public String getFavStatus() {
+    public  String getFavStatus() {
         return favStatus;
     }
 
@@ -96,15 +102,15 @@ public class LangModel {
         this.countries = countries;
     }
 
-    public int getSoundname() {
+    public  String getSoundname() {
         return soundname;
     }
 
-    public void setSoundname(int soundname) {
+    public void setSoundname(String soundname) {
         this.soundname = soundname;
     }
 
-    public int getImgsrc() {
+    public  int getImgsrc() {
         return imgsrc;
     }
 
@@ -112,7 +118,7 @@ public class LangModel {
         this.imgsrc = imgsrc;
     }
 
-    public int getSoundsrc() {
+    public  int getSoundsrc() {
         return soundsrc;
     }
 

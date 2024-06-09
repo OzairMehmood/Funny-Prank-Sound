@@ -39,21 +39,22 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
     @NonNull
     @Override
     public SoundsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        fvrtDB = new FvrtDB(context);
-        SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-        boolean firstStart = prefs.getBoolean("firstStart", true);
-        if (firstStart) {
-            createTableonFirst();
-        }
+
+//        SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+//        boolean firstStart = prefs.getBoolean("firstStart", true);
+//        if (firstStart) {
+//            createTableonFirst();
+//        }
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.soundl_ayout_design, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SoundsAdapter.ViewHolder holder, int position) {
-      final  LangModel langModel = soundList.get(position);
-        readCursorData(langModel,holder);
-        holder.soundName.setText(langModel.getSoundname());
+        LangModel langModel = soundList.get(position);
+
+        String soundName= String.valueOf(langModel.getSoundname());
+         holder.soundName.setText(soundName);
         // Load image using Glide
         Glide.with(context)
                 .load(langModel.getImgsrc())
@@ -62,6 +63,7 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
         holder.playBtn.setOnClickListener(v -> {
             Intent intent = new Intent(context, PlaySoundActivity.class);
             intent.putExtra("soundFile", langModel.getSoundsrc());
+            intent.putExtra("position", position);
             intent.putExtra("imageFile", langModel.getImgsrc());
             intent.putExtra("soundname", langModel.getSoundname());
             context.startActivity(intent);
@@ -85,22 +87,7 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
             playBtn = itemView.findViewById(R.id.cardviewbtn);
             favimg=itemView.findViewById(R.id.favouritimg);
 
-            favimg.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int position = getAdapterPosition();
-                    LangModel langModel =soundList .get(position);
-                    if (langModel.getFavStatus().equals("0")) {
-                        langModel.setFavStatus("1");
-                        fvrtDB.insertintoDataBase(langModel.getSoundname(), langModel.getImgsrc(), langModel.getKey_Id(), langModel.getFavStatus());
-                        favimg.setImageResource(R.drawable.fvrtimg2);
-                    } else {
-                        langModel.setFavStatus("0");
-                        fvrtDB.removeFav(langModel.getKey_Id());
-                        favimg.setImageResource(R.drawable.fvrtimg);
-                    }
-                }
-            });
+
         }
     }
     private void createTableonFirst() {

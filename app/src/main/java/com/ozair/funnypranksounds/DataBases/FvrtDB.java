@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.ozair.funnypranksounds.Models.LangModel;
+import com.ozair.funnypranksounds.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,11 @@ public class FvrtDB extends SQLiteOpenHelper {
     private static String TableName = "FavouriteTable";
     private static String Key_ID = "ID";
     private static String ItemTitle = "ItemTitle";
+    private static String soundsrc = "sound";
     private static String Item_Image = "ItemImage";
     public static String Favourite_Status = "FavouriteStatus";
     private static String Create_Table = "CREATE TABLE " + TableName +
-            "(" + Key_ID + " TEXT," + ItemTitle + " TEXT," + Item_Image +
+            "(" + Key_ID + " TEXT," + ItemTitle + " TEXT,"+ soundsrc + " TEXT," + Item_Image +
             " TEXT," + Favourite_Status + " TEXT)";
 
     Cursor cursor;
@@ -43,17 +45,18 @@ public class FvrtDB extends SQLiteOpenHelper {
     public void insertEmpty() {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        for (int x = 1; x <= 11; x++) {
+        for (int x = 1; x <= 200; x++) {
             cv.put(Key_ID, x);
             cv.put(Favourite_Status, "0");
             db.insert(TableName, null, cv);
         }
     }
-    public void insertintoDataBase(int title, int image, String id, String fav_status) {
+    public void insertintoDataBase(String title, int soundSrc, int image, String id, String fav_status) {
         SQLiteDatabase db;
         db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(ItemTitle, title);
+        cv.put(soundsrc,soundSrc);
         cv.put(Item_Image, image);
         cv.put(Key_ID, id);
         cv.put(Favourite_Status, fav_status);
@@ -81,11 +84,13 @@ public class FvrtDB extends SQLiteOpenHelper {
                 // Extract data from cursor and create LangModel objects
 
                 String id = String.valueOf(cursor.getColumnIndex("ID"));
-                int title = Integer.parseInt(String.valueOf(cursor.getColumnIndex("ItemTitle")));
+                String title = String.valueOf(Integer.parseInt(String.valueOf(cursor.getColumnIndex("ItemTitle"))));
                 int image = Integer.parseInt(String.valueOf(cursor.getColumnIndex("ItemImage")));
+                int sound = Integer.parseInt(String.valueOf(cursor.getColumnIndex("sound")));
+
                 String favStatus = String.valueOf(cursor.getColumnIndex("FavouriteStatus"));
 
-                LangModel langModel = new LangModel(id, title, image, favStatus);
+                LangModel langModel = new LangModel(title, image, sound,id ,favStatus);
                 langModelList.add(langModel);
             } while (cursor.moveToNext());
             cursor.close();

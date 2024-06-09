@@ -78,7 +78,8 @@ public class PrankFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_prank, container, false);
 
         recyclerViewCourse = view.findViewById(R.id.prankRec);
-        recyclerViewCourse.setLayoutManager(new LinearLayoutManager(requireActivity()));        prankAdapter = new PrankAdapter(getContext(), Repository.getCategoryName());
+        recyclerViewCourse.setLayoutManager(new LinearLayoutManager(requireActivity()));
+        prankAdapter = new PrankAdapter(getContext(), Repository.getCategoryName());
         recyclerViewCourse.setAdapter(prankAdapter);
         return view;
     }

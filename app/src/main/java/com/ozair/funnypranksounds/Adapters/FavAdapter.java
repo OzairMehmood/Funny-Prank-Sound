@@ -24,11 +24,11 @@
 //import java.util.ArrayList;
 //
 //public class FavAdapter extends RecyclerView.Adapter<FavAdapter.ViewHolder> {
-//    private ArrayList<FavModel> favitems;
+//    private ArrayList<LangModel> favitems;
 //    private Context context;
 //    private FvrtDB fvrtDB;
 //
-//    public FavAdapter(ArrayList<FavModel> favitems, Context context) {
+//    public FavAdapter(ArrayList<LangModel> favitems, Context context) {
 //        this.favitems = favitems;
 //        this.context = context;
 //    }
@@ -37,36 +37,29 @@
 //    @Override
 //    public FavAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 //        fvrtDB = new FvrtDB(context);
-//        SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-//        boolean firstStart = prefs.getBoolean("firstStart", true);
-//        if (firstStart) {
-//            createTableonFirst();
-//        }
-//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fav_itemdesign, parent, false);
+////        SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+////        boolean firstStart = prefs.getBoolean("firstStart", true);
+////        if (firstStart) {
+////            createTableonFirst();
+////        }
+//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.soundl_ayout_design, parent, false);
 //
 //        return new ViewHolder(view);
 //    }
 //
-//    private void createTableonFirst() {
-//        fvrtDB.insertEmpty();
-//        SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = prefs.edit();
-//        editor.putBoolean("firstStart", false);
-//        editor.apply();
-//    }
 //
 //    @Override
 //    public void onBindViewHolder(@NonNull FavAdapter.ViewHolder holder, int position) {
-//        final FavModel favModel = favitems.get(position);
+//        final LangModel favModel = favitems.get(position);
 //        readCursorData(favModel,holder);
-//        holder.image.setImageResource(favModel.getItem_image());
-//        holder.title.setText(favModel.getItem_title());
+//        holder.image.setImageResource(LangModel.getImgsrc());
+//        holder.title.setText(LangModel.getSoundname());
 //
 //    }
 //
 //    @SuppressLint("ResourceType")
-//    private void readCursorData(FavModel favModel, ViewHolder viewHolder) {
-//        Cursor cursor = fvrtDB.readdataBase(favModel.getKey_Id());
+//    private void readCursorData(LangModel favModel, ViewHolder viewHolder) {
+//        Cursor cursor = fvrtDB.readDataBase(favModel.getKey_Id());
 //        SQLiteDatabase db = fvrtDB.getReadableDatabase();
 //        try {
 //            while (cursor.moveToNext()) {
@@ -98,17 +91,17 @@
 //        public ViewHolder(@NonNull View itemView) {
 //            super(itemView);
 //            image = itemView.findViewById(R.id.imageviewcard);
-//            favimg = itemView.findViewById(R.id.favrtimg);
+//            favimg = itemView.findViewById(R.id.favouritimg);
 //            title = itemView.findViewById(R.id.soundname);
 //
 //            favimg.setOnClickListener(new View.OnClickListener() {
 //                @Override
 //                public void onClick(View v) {
 //                    int position = getAdapterPosition();
-//                    FavModel favModel = favitems.get(position);
+//                    LangModel favModel = favitems.get(position);
 //                    if (favModel.getFavStatus().equals("0")) {
 //                        favModel.setFavStatus("1");
-//                        fvrtDB.insertintoDataBase(favModel.getItem_title(), favModel.getItem_image(), favModel.getKey_Id(), favModel.getFavStatus());
+//                        fvrtDB.insertintoDataBase(LangModel.getSoundname(),position,LangModel.getSoundsrc(), LangModel.getKey_Id(), LangModel.getFavStatus());
 //                        favimg.setImageResource(R.drawable.fvrtimg2);
 //                    } else {
 //                        favModel.setFavStatus("0");

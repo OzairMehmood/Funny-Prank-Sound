@@ -20,17 +20,21 @@ import androidx.core.content.ContextCompat;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
+import com.ozair.funnypranksounds.DataBases.FvrtDB;
+import com.ozair.funnypranksounds.Models.LangModel;
 import com.ozair.funnypranksounds.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlaySoundActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_WRITE = 1001;
     private static final String TAG = "PlaySoundActivity";
 
-    ImageView playImage, Downloadbtn, fvrtbtn;
+    ImageView playImage, Downloadbtn, favimg;
     TextView tapToPlay, taptopause, toolbartext;
     private MediaPlayer mediaPlayer;
     RelativeLayout playLay;
@@ -38,16 +42,21 @@ public class PlaySoundActivity extends AppCompatActivity {
     private boolean isPlaying = false;
     private int soundFile;
     private boolean isFavourite = false;
+    List<LangModel> soundList = new ArrayList<>();
+
+    private static FvrtDB fvrtDB;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_sound);
+        fvrtDB = new FvrtDB(this);
+
         lottieAnimationView = findViewById(R.id.lotiee);
         playLay = findViewById(R.id.pal_lay);
         toolbartext = findViewById(R.id.tooltext);
-        fvrtbtn = findViewById(R.id.fvrtimg);
+        favimg = findViewById(R.id.fvrtimg);
         Downloadbtn = findViewById(R.id.downloadimg);
         taptopause = findViewById(R.id.taptopause);
         playImage = findViewById(R.id.playimg);
@@ -56,6 +65,7 @@ public class PlaySoundActivity extends AppCompatActivity {
         int imageFile = getIntent().getIntExtra("imageFile", -1);
         soundFile = getIntent().getIntExtra("soundFile", -1);
         String nameFile = getIntent().getStringExtra("soundname");
+        int position = getIntent().getIntExtra("position", 0);
         toolbartext.setText(nameFile);
 
         if (imageFile != -1) {
@@ -85,12 +95,40 @@ public class PlaySoundActivity extends AppCompatActivity {
                 requestPermission();
             }
         });
-        fvrtbtn.setOnClickListener(new View.OnClickListener() {
+
+        favimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                togglefvrt();
+                // Check if soundList contains at least one element
+                if (position >= 0 && position < soundList.size()) {
+                    LangModel langModel = soundList.get(position); // Access the element at the correct position
+                    if (langModel != null && langModel.getFavStatus() != null) {
+                        if (langModel.getFavStatus().equals("0")) {
+                            langModel.setFavStatus("1");
+                            fvrtDB.insertintoDataBase(langModel.getSoundname(), langModel.getImgsrc(), langModel.getSoundsrc(), langModel.getKey_Id(), langModel.getFavStatus());
+                            favimg.setImageResource(R.drawable.fvrtimg2);
+                        } else {
+                            langModel.setFavStatus("0");
+                            fvrtDB.removeFav(langModel.getKey_Id());
+                            favimg.setImageResource(R.drawable.fvrtimg);
+                        }
+                    } else {
+                        Log.e(TAG, "langModel or favStatus is null");
+                    }
+                } else {
+                    Log.e(TAG, "soundList is empty or invalid position");
+                }
             }
         });
+
+        // Populating soundList with data
+        soundList = getSoundListFromIntent(); // Implement this method to get the list from intent extras
+
+        // Logging the contents of soundList for debugging
+        for (int i = 0; i < soundList.size(); i++) {
+            LangModel langModel = soundList.get(i);
+            Log.d(TAG, "LangModel at index " + i + ": " + langModel.getSoundname() + ", " + langModel.getFavStatus());
+        }
     }
 
     private boolean checkPermission() {
@@ -136,9 +174,11 @@ public class PlaySoundActivity extends AppCompatActivity {
         if (tapToPlay.getVisibility() == View.VISIBLE) {
             tapToPlay.setVisibility(View.GONE);
             taptopause.setVisibility(View.VISIBLE);
+            startPlaying(soundFile);
         } else {
             tapToPlay.setVisibility(View.VISIBLE);
             taptopause.setVisibility(View.GONE);
+            stopPlaying();
         }
     }
 
@@ -191,17 +231,24 @@ public class PlaySoundActivity extends AppCompatActivity {
         }
     }
 
-    private void togglefvrt() {
-        if (isFavourite) {
-            isFavourite = false;
+    private List<LangModel> getSoundListFromIntent() {
+        List<LangModel> list = new ArrayList<>();
+        // Retrieve data from intent extras and add LangModel objects to the list
+        // Example:
+        int imageFile = getIntent().getIntExtra("imageFile", -1);
+        int soundFile = getIntent().getIntExtra("soundFile", -1);
+        String soundName = getIntent().getStringExtra("soundname");
+        int keyId = getIntent().getIntExtra("keyId", -1);
+        String favStatus = getIntent().getStringExtra("favStatus");
 
-            fvrtbtn.setImageResource(R.drawable.fvrtimg);
-            Toast.makeText(PlaySoundActivity.this, "Removed From Favourite", Toast.LENGTH_SHORT).show();
-        } else {
-            isFavourite = true;
+        LangModel model = new LangModel();
+        model.setImgsrc(imageFile);
+        model.setSoundsrc(soundFile);
+        model.setSoundname(soundName);
+        model.setKey_Id(String.valueOf(keyId));
+        model.setFavStatus(favStatus);
+        list.add(model);
 
-            fvrtbtn.setImageResource(R.drawable.fvrtimg2);
-            Toast.makeText(PlaySoundActivity.this, "Added TO Favourite", Toast.LENGTH_SHORT).show();
-        }
+        return list;
     }
 }
