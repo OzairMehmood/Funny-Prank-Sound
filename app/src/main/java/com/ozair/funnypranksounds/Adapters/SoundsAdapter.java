@@ -1,8 +1,11 @@
 package com.ozair.funnypranksounds.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.media.MediaPlayer;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +17,9 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-
-
 import com.ozair.funnypranksounds.Activities.PlaySoundActivity;
+import com.ozair.funnypranksounds.DataBases.FvrtDB;
+import com.ozair.funnypranksounds.Models.FavModel;
 import com.ozair.funnypranksounds.Models.LangModel;
 import com.ozair.funnypranksounds.R;
 
@@ -25,8 +28,8 @@ import java.util.List;
 public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder> {
 
     private final Context context;
-    private final List<LangModel> soundList;
-    private MediaPlayer mediaPlayer;
+    private static  List<LangModel> soundList;
+    private static FvrtDB fvrtDB;
 
     public SoundsAdapter(Context context, List<LangModel> soundList) {
         this.context = context;
@@ -36,13 +39,20 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
     @NonNull
     @Override
     public SoundsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        fvrtDB = new FvrtDB(context);
+        SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        boolean firstStart = prefs.getBoolean("firstStart", true);
+        if (firstStart) {
+            createTableonFirst();
+        }
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.soundl_ayout_design, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull SoundsAdapter.ViewHolder holder, int position) {
-        LangModel langModel = soundList.get(position);
+      final  LangModel langModel = soundList.get(position);
+        readCursorData(langModel,holder);
         holder.soundName.setText(langModel.getSoundname());
         // Load image using Glide
         Glide.with(context)
@@ -65,7 +75,7 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView soundName;
-        ImageView imageViewCard;
+        ImageView imageViewCard,favimg;
         CardView playBtn;
 
         public ViewHolder(@NonNull View itemView) {
@@ -73,6 +83,51 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
             soundName = itemView.findViewById(R.id.soundname);
             imageViewCard = itemView.findViewById(R.id.imageviewcard);
             playBtn = itemView.findViewById(R.id.cardviewbtn);
+            favimg=itemView.findViewById(R.id.favouritimg);
+
+            favimg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    LangModel langModel =soundList .get(position);
+                    if (langModel.getFavStatus().equals("0")) {
+                        langModel.setFavStatus("1");
+                        fvrtDB.insertintoDataBase(langModel.getSoundname(), langModel.getImgsrc(), langModel.getKey_Id(), langModel.getFavStatus());
+                        favimg.setImageResource(R.drawable.fvrtimg2);
+                    } else {
+                        langModel.setFavStatus("0");
+                        fvrtDB.removeFav(langModel.getKey_Id());
+                        favimg.setImageResource(R.drawable.fvrtimg);
+                    }
+                }
+            });
+        }
+    }
+    private void createTableonFirst() {
+        fvrtDB.insertEmpty();
+        SharedPreferences prefs = context.getSharedPreferences("prefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("firstStart", false);
+        editor.apply();
+    }
+    private void readCursorData(LangModel favModel, SoundsAdapter.ViewHolder viewHolder) {
+        Cursor cursor = fvrtDB.readDataBase(favModel.getKey_Id());
+        SQLiteDatabase db = fvrtDB.getReadableDatabase();
+        try {
+            while (cursor.moveToNext()) {
+                @SuppressLint("Range") String item_Fav_status = cursor.getString(cursor.getColumnIndex(FvrtDB.Favourite_Status));
+                favModel.setFavStatus(item_Fav_status);
+                if (item_Fav_status != null && item_Fav_status.equals("1")) {
+                    viewHolder.imageViewCard.setImageResource(R.drawable.fvrtimg2);
+                }else  if (item_Fav_status != null && item_Fav_status.equals("0")) {
+                    viewHolder.imageViewCard.setImageResource(R.drawable.fvrtimg);
+                }
+            }
+        }finally {
+            if(cursor!=null&&cursor.isClosed()){
+                cursor.close();
+                db.close();
+            }
         }
     }
 }

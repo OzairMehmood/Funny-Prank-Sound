@@ -30,4 +30,11 @@
         android:textStyle="bold" />
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:id="@+id/favrec"
+        android:layout_below="@+id/toolbar"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

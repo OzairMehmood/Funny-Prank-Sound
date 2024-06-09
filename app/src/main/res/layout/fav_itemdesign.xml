@@ -1,0 +1,74 @@
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="120dp"-->
+<!--    android:layout_marginStart="25dp"-->
+<!--    android:layout_marginTop="20dp"-->
+<!--    android:layout_marginEnd="25dp"-->
+<!--    android:layout_marginBottom="10dp">-->
+
+<!--    <RelativeLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            android:id="@+id/cardviewbtn"-->
+<!--            android:layout_width="120dp"-->
+<!--            android:layout_height="120dp"-->
+<!--            android:padding="10dp">-->
+
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent">-->
+
+<!--                <ImageView-->
+<!--                    android:id="@+id/imageviewcard"-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+
+<!--                    android:layout_centerInParent="true"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    android:src="@drawable/splashbackground">-->
+
+<!--                </ImageView>-->
+
+
+<!--            </RelativeLayout>-->
+<!--        </com.google.android.material.card.MaterialCardView>-->
+
+<!--        <RelativeLayout-->
+<!--            android:id="@+id/playbtn"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_centerVertical="true"-->
+<!--            android:layout_toEndOf="@+id/cardviewbtn">-->
+
+
+<!--            <TextView-->
+<!--                android:id="@+id/soundname"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/play"-->
+<!--                android:textAlignment="center"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="12sp">-->
+
+<!--            </TextView>-->
+<!--        </RelativeLayout>-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/favrtimg"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_alignParentEnd="true"-->
+<!--            android:layout_marginEnd="10dp"-->
+<!--            android:layout_marginTop="3dp"-->
+<!--            android:layout_above="@+id/playbtn"-->
+<!--            android:src="@drawable/fvrtimg2">-->
+
+<!--        </ImageView>-->
+
+<!--    </RelativeLayout>-->
+<!--</com.google.android.material.card.MaterialCardView>-->

@@ -6,6 +6,9 @@ public class LangModel {
     int soundname;
     int imgsrc,soundsrc;
     int categoryName;
+    public    String Key_Id,favStatus;
+
+
 
 
 
@@ -14,16 +17,43 @@ public class LangModel {
         this.countries = countries;
     }
 
-    public LangModel(int soundname, int imgsrc, int soundsrc) {
+    public LangModel(int soundname, int imgsrc, int soundsrc, String key_Id, String favStatus) {
         this.soundname = soundname;
         this.imgsrc = imgsrc;
         this.soundsrc = soundsrc;
+        Key_Id = key_Id;
+        this.favStatus = favStatus;
     }
 
-    public LangModel( int categoryName,String category, String emptyString) {
+    public LangModel(int categoryName, String emptyString,String category ) {
         this.category = category;
         EmptyString = emptyString;
         this.categoryName = categoryName;
+
+    }
+
+    public LangModel(String id, int title, int image, String favStatus) {
+        Key_Id = id;
+        soundname=title;
+        imgsrc=image;
+        this.favStatus=favStatus;
+
+    }
+
+    public String getKey_Id() {
+        return Key_Id;
+    }
+
+    public void setKey_Id(String key_Id) {
+        Key_Id = key_Id;
+    }
+
+    public String getFavStatus() {
+        return favStatus;
+    }
+
+    public void setFavStatus(String favStatus) {
+        this.favStatus = favStatus;
     }
 
     public String getCategory() {

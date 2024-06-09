@@ -1,9 +1,10 @@
+package com.ozair.funnypranksounds.Activities;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -24,19 +25,19 @@ import com.ozair.funnypranksounds.R;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class PlaySoundActivity extends AppCompatActivity {
     private static final int REQUEST_PERMISSION_WRITE = 1001;
     private static final String TAG = "PlaySoundActivity";
 
-    ImageView playImage, Downloadbtn;
+    ImageView playImage, Downloadbtn, fvrtbtn;
     TextView tapToPlay, taptopause, toolbartext;
     private MediaPlayer mediaPlayer;
     RelativeLayout playLay;
     LottieAnimationView lottieAnimationView;
     private boolean isPlaying = false;
+    private int soundFile;
+    private boolean isFavourite = false;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -46,15 +47,16 @@ public class PlaySoundActivity extends AppCompatActivity {
         lottieAnimationView = findViewById(R.id.lotiee);
         playLay = findViewById(R.id.pal_lay);
         toolbartext = findViewById(R.id.tooltext);
+        fvrtbtn = findViewById(R.id.fvrtimg);
         Downloadbtn = findViewById(R.id.downloadimg);
         taptopause = findViewById(R.id.taptopause);
         playImage = findViewById(R.id.playimg);
         tapToPlay = findViewById(R.id.taptoplay);
 
         int imageFile = getIntent().getIntExtra("imageFile", -1);
-        int soundFile = getIntent().getIntExtra("soundFile", -1);
-        int nameFile = getIntent().getIntExtra("soundname", 0);
-        toolbartext.setText(String.valueOf(nameFile));
+        soundFile = getIntent().getIntExtra("soundFile", -1);
+        String nameFile = getIntent().getStringExtra("soundname");
+        toolbartext.setText(nameFile);
 
         if (imageFile != -1) {
             // Set the image in the ImageView using Glide
@@ -65,14 +67,14 @@ public class PlaySoundActivity extends AppCompatActivity {
 
         if (soundFile != -1) {
             playImage.setOnClickListener(v -> {
-                if (isPlaying) {
+                toggleTapToPlayVisibility();
+                if (tapToPlay.getVisibility() == View.VISIBLE) {
                     stopPlaying();
                     lottieAnimationView.setVisibility(View.GONE);
                 } else {
                     startPlaying(soundFile);
                     lottieAnimationView.setVisibility(View.VISIBLE);
                 }
-                toggleTapToPlayVisibility();
             });
         }
 
@@ -81,6 +83,12 @@ public class PlaySoundActivity extends AppCompatActivity {
                 startDownload(soundFile);
             } else {
                 requestPermission();
+            }
+        });
+        fvrtbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                togglefvrt();
             }
         });
     }
@@ -99,6 +107,7 @@ public class PlaySoundActivity extends AppCompatActivity {
         if (requestCode == REQUEST_PERMISSION_WRITE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission granted.", Toast.LENGTH_SHORT).show();
+                startDownload(soundFile);  // Retry download if permission is granted
             } else {
                 Toast.makeText(this, "Permission denied.", Toast.LENGTH_SHORT).show();
             }
@@ -124,50 +133,50 @@ public class PlaySoundActivity extends AppCompatActivity {
     }
 
     private void toggleTapToPlayVisibility() {
-        if (tapToPlay.getVisibility() == TextView.VISIBLE) {
-            tapToPlay.setVisibility(TextView.GONE);
-            taptopause.setVisibility(TextView.VISIBLE);
+        if (tapToPlay.getVisibility() == View.VISIBLE) {
+            tapToPlay.setVisibility(View.GONE);
+            taptopause.setVisibility(View.VISIBLE);
         } else {
-            tapToPlay.setVisibility(TextView.VISIBLE);
-            taptopause.setVisibility(TextView.GONE);
+            tapToPlay.setVisibility(View.VISIBLE);
+            taptopause.setVisibility(View.GONE);
         }
     }
 
     private void startDownload(int soundFile) {
-        new DownloadFileTask().execute(getString(soundFile));
+        new DownloadFileTask().execute(soundFile);
     }
 
-    private class DownloadFileTask extends AsyncTask<String, Void, Boolean> {
+    private class DownloadFileTask extends AsyncTask<Integer, Void, Boolean> {
 
         @Override
-        protected Boolean doInBackground(String... strings) {
-            String fileUrl = strings[0];
+        protected Boolean doInBackground(Integer... params) {
+            int resourceId = params[0];
+            InputStream input = null;
+            FileOutputStream output = null;
             try {
-                URL url = new URL(fileUrl);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
+                // Input stream from resource
+                input = getResources().openRawResource(resourceId);
+                File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "sound.mp3");
+                output = new FileOutputStream(outputFile);
 
-                // Input stream to read file - with 8k buffer
-                InputStream input = connection.getInputStream();
                 byte[] buffer = new byte[8192];
                 int bytesRead;
-
-                // Output stream to write file
-                File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "sound.mp3");
-                FileOutputStream outputStream = new FileOutputStream(outputFile);
-
                 while ((bytesRead = input.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
+                    output.write(buffer, 0, bytesRead);
                 }
 
-                // Close streams
-                outputStream.flush();
-                outputStream.close();
-                input.close();
+                output.flush();
                 return true;
             } catch (Exception e) {
                 Log.e(TAG, "Error downloading file: " + e.getMessage());
                 return false;
+            } finally {
+                try {
+                    if (input != null) input.close();
+                    if (output != null) output.close();
+                } catch (Exception e) {
+                    Log.e(TAG, "Error closing streams: " + e.getMessage());
+                }
             }
         }
 
@@ -179,6 +188,20 @@ public class PlaySoundActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(PlaySoundActivity.this, "Download failed!", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    private void togglefvrt() {
+        if (isFavourite) {
+            isFavourite = false;
+
+            fvrtbtn.setImageResource(R.drawable.fvrtimg);
+            Toast.makeText(PlaySoundActivity.this, "Removed From Favourite", Toast.LENGTH_SHORT).show();
+        } else {
+            isFavourite = true;
+
+            fvrtbtn.setImageResource(R.drawable.fvrtimg2);
+            Toast.makeText(PlaySoundActivity.this, "Added TO Favourite", Toast.LENGTH_SHORT).show();
         }
     }
 }
