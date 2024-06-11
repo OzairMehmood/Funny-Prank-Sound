@@ -1,4 +1,4 @@
-package com.ozair.funnypranksounds.Adapters;
+package com.ozair.funnypranksounds.Fragments.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,7 +15,6 @@ import com.ozair.funnypranksounds.Models.LangModel;
 import com.ozair.funnypranksounds.R;
 import com.ozair.funnypranksounds.Utilz.SharedPrefs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.ViewHolder> {

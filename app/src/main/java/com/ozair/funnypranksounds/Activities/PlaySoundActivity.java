@@ -3,6 +3,7 @@ package com.ozair.funnypranksounds.Activities;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,6 +42,11 @@ public class PlaySoundActivity extends AppCompatActivity {
     LottieAnimationView lottieAnimationView;
     private boolean isPlaying = false;
     private int soundFile;
+    private int imageFile;
+    private String nameFile;
+    private int position;
+    private String keyId;
+    private String favStatus;
     private boolean isFavourite = false;
     List<LangModel> soundList = new ArrayList<>();
 
@@ -62,10 +68,12 @@ public class PlaySoundActivity extends AppCompatActivity {
         playImage = findViewById(R.id.playimg);
         tapToPlay = findViewById(R.id.taptoplay);
 
-        int imageFile = getIntent().getIntExtra("imageFile", -1);
+        imageFile = getIntent().getIntExtra("imageFile", -1);
         soundFile = getIntent().getIntExtra("soundFile", -1);
-        String nameFile = getIntent().getStringExtra("soundname");
-        int position = getIntent().getIntExtra("position", 0);
+        nameFile = getIntent().getStringExtra("soundname");
+        position = getIntent().getIntExtra("position", 0);
+        keyId = getIntent().getStringExtra("keyId");
+
         toolbartext.setText(nameFile);
 
         if (imageFile != -1) {
@@ -96,39 +104,24 @@ public class PlaySoundActivity extends AppCompatActivity {
             }
         });
 
-        favimg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Check if soundList contains at least one element
-                if (position >= 0 && position < soundList.size()) {
-                    LangModel langModel = soundList.get(position); // Access the element at the correct position
-                    if (langModel != null && langModel.getFavStatus() != null) {
-                        if (langModel.getFavStatus().equals("0")) {
-                            langModel.setFavStatus("1");
-                            fvrtDB.insertintoDataBase(langModel.getSoundname(), langModel.getImgsrc(), langModel.getSoundsrc(), langModel.getKey_Id(), langModel.getFavStatus());
-                            favimg.setImageResource(R.drawable.fvrtimg2);
-                        } else {
-                            langModel.setFavStatus("0");
-                            fvrtDB.removeFav(langModel.getKey_Id());
-                            favimg.setImageResource(R.drawable.fvrtimg);
-                        }
-                    } else {
-                        Log.e(TAG, "langModel or favStatus is null");
-                    }
-                } else {
-                    Log.e(TAG, "soundList is empty or invalid position");
-                }
-            }
+        favimg.setOnClickListener(v -> {
+            toggleFavourite();
         });
 
         // Populating soundList with data
-        soundList = getSoundListFromIntent(); // Implement this method to get the list from intent extras
+        updateSoundListFromIntent();
 
         // Logging the contents of soundList for debugging
         for (int i = 0; i < soundList.size(); i++) {
             LangModel langModel = soundList.get(i);
             Log.d(TAG, "LangModel at index " + i + ": " + langModel.getSoundname() + ", " + langModel.getFavStatus());
         }
+
+        // Fetch the favorite status for all items in the soundList
+        fetchFavStatusForAllItems();
+
+        // Update fav image status based on initial data
+        updateFavImage();
     }
 
     private boolean checkPermission() {
@@ -231,24 +224,64 @@ public class PlaySoundActivity extends AppCompatActivity {
         }
     }
 
-    private List<LangModel> getSoundListFromIntent() {
-        List<LangModel> list = new ArrayList<>();
+    private void updateSoundListFromIntent() {
         // Retrieve data from intent extras and add LangModel objects to the list
-        // Example:
-        int imageFile = getIntent().getIntExtra("imageFile", -1);
-        int soundFile = getIntent().getIntExtra("soundFile", -1);
-        String soundName = getIntent().getStringExtra("soundname");
-        int keyId = getIntent().getIntExtra("keyId", -1);
-        String favStatus = getIntent().getStringExtra("favStatus");
-
         LangModel model = new LangModel();
         model.setImgsrc(imageFile);
         model.setSoundsrc(soundFile);
-        model.setSoundname(soundName);
+        model.setSoundname(nameFile);
         model.setKey_Id(String.valueOf(keyId));
         model.setFavStatus(favStatus);
-        list.add(model);
+        soundList.add(model);
+    }
 
-        return list;
+    private void fetchFavStatusForAllItems() {
+        for (LangModel model : soundList) {
+            Cursor cursor = fvrtDB.readDataBase(model.getKey_Id());
+            if (cursor != null && cursor.moveToFirst()) {
+                int favStatusIndex = cursor.getColumnIndex(FvrtDB.Favourite_Status);
+                if (favStatusIndex >= 0) {
+                    model.setFavStatus(cursor.getString(favStatusIndex));
+                } else {
+                    Log.e(TAG, "Favourite_Status column not found in the database for keyId: " + model.getKey_Id());
+                    model.setFavStatus("0"); // Default value if column not found
+                }
+                cursor.close();
+            } else {
+                Log.e(TAG, "Cursor is null or empty for keyId: " + model.getKey_Id());
+                model.setFavStatus("0"); // Default value if cursor is null or empty
+            }
+        }
+    }
+
+    private void toggleFavourite() {
+        if (position >= 0 && position < soundList.size()) {
+            LangModel langModel = soundList.get(position);
+            if (langModel != null && langModel.getFavStatus() != null) {
+                if (langModel.getFavStatus().equals("0")) {
+                    langModel.setFavStatus("1");
+                    fvrtDB.insertintoDataBase(nameFile, soundFile, imageFile, keyId, "1");
+                    favimg.setImageResource(R.drawable.fvrtimg2);
+                } else {
+                    langModel.setFavStatus("0");
+                    fvrtDB.removeFav(keyId);
+                    favimg.setImageResource(R.drawable.fvrtimg);
+                }
+                // Update favStatus variable with the current favorite status of the selected item
+                favStatus = langModel.getFavStatus();
+            } else {
+                Log.e(TAG, "langModel or favStatus is null for position: " + position);
+            }
+        } else {
+            Log.e(TAG, "soundList is empty or invalid position");
+        }
+    }
+
+    private void updateFavImage() {
+        if (favStatus != null && favStatus.equals("1")) {
+            favimg.setImageResource(R.drawable.fvrtimg2);
+        } else {
+            favimg.setImageResource(R.drawable.fvrtimg);
+        }
     }
 }

@@ -1,4 +1,4 @@
-package com.ozair.funnypranksounds.Adapters;
+package com.ozair.funnypranksounds.Fragments.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.ozair.funnypranksounds.Activities.PlaySoundActivity;
 import com.ozair.funnypranksounds.DataBases.FvrtDB;
-import com.ozair.funnypranksounds.Models.FavModel;
 import com.ozair.funnypranksounds.Models.LangModel;
 import com.ozair.funnypranksounds.R;
 
@@ -66,6 +65,8 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
             intent.putExtra("position", position);
             intent.putExtra("imageFile", langModel.getImgsrc());
             intent.putExtra("soundname", langModel.getSoundname());
+            intent.putExtra("keyId", langModel.getKey_Id());
+            intent.putExtra("favStatus", langModel.getFavStatus());
             context.startActivity(intent);
         });
     }
@@ -85,7 +86,7 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
             soundName = itemView.findViewById(R.id.soundname);
             imageViewCard = itemView.findViewById(R.id.imageviewcard);
             playBtn = itemView.findViewById(R.id.cardviewbtn);
-            favimg=itemView.findViewById(R.id.favouritimg);
+
 
 
         }

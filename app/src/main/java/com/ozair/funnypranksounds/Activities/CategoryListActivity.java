@@ -5,16 +5,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 
-import com.ozair.funnypranksounds.Adapters.SoundsAdapter;
+import com.ozair.funnypranksounds.Fragments.Adapters.SoundsAdapter;
 import com.ozair.funnypranksounds.Models.LangModel;
 import com.ozair.funnypranksounds.R;
-import com.ozair.funnypranksounds.Repository.Repository;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class CategoryListActivity extends AppCompatActivity {
     private SoundsAdapter soundsAdapter;

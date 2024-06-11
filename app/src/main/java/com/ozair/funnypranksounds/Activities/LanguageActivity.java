@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ozair.funnypranksounds.Adapters.LanguageAdapter;
+import com.ozair.funnypranksounds.Fragments.Adapters.LanguageAdapter;
 import com.ozair.funnypranksounds.Models.LangModel;
 import com.ozair.funnypranksounds.R;
 import com.ozair.funnypranksounds.Repository.Repository;

@@ -1,4 +1,4 @@
-package com.ozair.funnypranksounds.Adapters;
+package com.ozair.funnypranksounds.Fragments.Adapters;
 
 import android.content.Context;
 import android.content.Intent;

@@ -1,6 +1,5 @@
 package com.ozair.funnypranksounds.Fragments;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,10 +9,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ozair.funnypranksounds.Adapters.SoundsAdapter;
+import com.ozair.funnypranksounds.Fragments.Adapters.SoundsAdapter;
 import com.ozair.funnypranksounds.DataBases.FvrtDB;
 import com.ozair.funnypranksounds.R;
-import com.ozair.funnypranksounds.Repository.Repository;
 
 public class FavouriteFragment extends Fragment {
     private RecyclerView recyclerView;
