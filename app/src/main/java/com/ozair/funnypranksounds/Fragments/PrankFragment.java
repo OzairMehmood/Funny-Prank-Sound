@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.ozair.funnypranksounds.Fragments.Adapters.PrankAdapter;
+import com.ozair.funnypranksounds.Adapters.PrankAdapter;
 import com.ozair.funnypranksounds.Models.LangModel;
 import com.ozair.funnypranksounds.R;
 import com.ozair.funnypranksounds.Repository.Repository;

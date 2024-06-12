@@ -15,14 +15,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.ozair.funnypranksounds.DataBases.FvrtDB;
 import com.ozair.funnypranksounds.Models.LangModel;
+import com.ozair.funnypranksounds.Models.SharedViewModel;
 import com.ozair.funnypranksounds.R;
 
 import java.io.File;
@@ -47,10 +52,13 @@ public class PlaySoundActivity extends AppCompatActivity {
     private int position;
     private String keyId;
     private String favStatus;
+    MutableLiveData<PlaySoundActivity> mutableLiveData;
+
     private boolean isFavourite = false;
     List<LangModel> soundList = new ArrayList<>();
 
     private static FvrtDB fvrtDB;
+    private SharedViewModel sharedViewModel;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -58,6 +66,7 @@ public class PlaySoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_sound);
         fvrtDB = new FvrtDB(this);
+        sharedViewModel = new ViewModelProvider(this).get(SharedViewModel.class);
 
         lottieAnimationView = findViewById(R.id.lotiee);
         playLay = findViewById(R.id.pal_lay);
@@ -73,6 +82,7 @@ public class PlaySoundActivity extends AppCompatActivity {
         nameFile = getIntent().getStringExtra("soundname");
         position = getIntent().getIntExtra("position", 0);
         keyId = getIntent().getStringExtra("keyId");
+        favStatus = getIntent().getStringExtra("favStatus");
 
         toolbartext.setText(nameFile);
 
@@ -104,47 +114,33 @@ public class PlaySoundActivity extends AppCompatActivity {
             }
         });
 
+
         favimg.setOnClickListener(v -> {
             toggleFavourite();
         });
 
-        // Populating soundList with data
         updateSoundListFromIntent();
-
-        // Logging the contents of soundList for debugging
-        for (int i = 0; i < soundList.size(); i++) {
-            LangModel langModel = soundList.get(i);
-            Log.d(TAG, "LangModel at index " + i + ": " + langModel.getSoundname() + ", " + langModel.getFavStatus());
-        }
-
-        // Fetch the favorite status for all items in the soundList
         fetchFavStatusForAllItems();
-
-        // Update fav image status based on initial data
         updateFavImage();
     }
-
     private boolean checkPermission() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
-
     private void requestPermission() {
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_WRITE);
     }
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_PERMISSION_WRITE) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission granted.", Toast.LENGTH_SHORT).show();
-                startDownload(soundFile);  // Retry download if permission is granted
+                Toast.makeText(this, "Permission granted. Download will start now.", Toast.LENGTH_SHORT).show();
+                startDownload(soundFile);  // Start download if permission is granted
             } else {
-                Toast.makeText(this, "Permission denied.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission denied. Cannot start download.", Toast.LENGTH_SHORT).show();
             }
         }
     }
-
     private void startPlaying(int soundFile) {
         if (mediaPlayer != null) {
             mediaPlayer.release();
@@ -153,7 +149,6 @@ public class PlaySoundActivity extends AppCompatActivity {
         mediaPlayer.start();
         isPlaying = true;
     }
-
     private void stopPlaying() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
@@ -162,7 +157,6 @@ public class PlaySoundActivity extends AppCompatActivity {
         }
         isPlaying = false;
     }
-
     private void toggleTapToPlayVisibility() {
         if (tapToPlay.getVisibility() == View.VISIBLE) {
             tapToPlay.setVisibility(View.GONE);
@@ -174,11 +168,9 @@ public class PlaySoundActivity extends AppCompatActivity {
             stopPlaying();
         }
     }
-
     private void startDownload(int soundFile) {
         new DownloadFileTask().execute(soundFile);
     }
-
     private class DownloadFileTask extends AsyncTask<Integer, Void, Boolean> {
 
         @Override
@@ -187,7 +179,6 @@ public class PlaySoundActivity extends AppCompatActivity {
             InputStream input = null;
             FileOutputStream output = null;
             try {
-                // Input stream from resource
                 input = getResources().openRawResource(resourceId);
                 File outputFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "sound.mp3");
                 output = new FileOutputStream(outputFile);
@@ -223,9 +214,7 @@ public class PlaySoundActivity extends AppCompatActivity {
             }
         }
     }
-
     private void updateSoundListFromIntent() {
-        // Retrieve data from intent extras and add LangModel objects to the list
         LangModel model = new LangModel();
         model.setImgsrc(imageFile);
         model.setSoundsrc(soundFile);
@@ -234,7 +223,6 @@ public class PlaySoundActivity extends AppCompatActivity {
         model.setFavStatus(favStatus);
         soundList.add(model);
     }
-
     private void fetchFavStatusForAllItems() {
         for (LangModel model : soundList) {
             Cursor cursor = fvrtDB.readDataBase(model.getKey_Id());
@@ -253,10 +241,9 @@ public class PlaySoundActivity extends AppCompatActivity {
             }
         }
     }
-
     private void toggleFavourite() {
-        if (position >= 0 && position < soundList.size()) {
-            LangModel langModel = soundList.get(position);
+        if (soundList.size()>0) {
+            LangModel langModel = soundList.get(0);
             if (langModel != null && langModel.getFavStatus() != null) {
                 if (langModel.getFavStatus().equals("0")) {
                     langModel.setFavStatus("1");
@@ -266,8 +253,8 @@ public class PlaySoundActivity extends AppCompatActivity {
                     langModel.setFavStatus("0");
                     fvrtDB.removeFav(keyId);
                     favimg.setImageResource(R.drawable.fvrtimg);
+                    sharedViewModel.setLiveData("0");
                 }
-                // Update favStatus variable with the current favorite status of the selected item
                 favStatus = langModel.getFavStatus();
             } else {
                 Log.e(TAG, "langModel or favStatus is null for position: " + position);
@@ -276,8 +263,18 @@ public class PlaySoundActivity extends AppCompatActivity {
             Log.e(TAG, "soundList is empty or invalid position");
         }
     }
-
     private void updateFavImage() {
+        String itemId = keyId;
+        boolean isFavourite = fvrtDB.isItemFavourite(itemId);
+
+        if (isFavourite) {
+            favimg.setImageResource(R.drawable.fvrtimg2);
+            Log.d("PlaySoundActivity", "Item with ID " + itemId + " is a favorite.");
+        } else {
+            favimg.setImageResource(R.drawable.fvrtimg);
+            Log.d("PlaySoundActivity", "Item with ID " + itemId + " is not a favorite.");
+        }
+
         if (favStatus != null && favStatus.equals("1")) {
             favimg.setImageResource(R.drawable.fvrtimg2);
         } else {

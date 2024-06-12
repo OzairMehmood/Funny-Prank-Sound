@@ -87,6 +87,22 @@ public class FvrtDB extends SQLiteOpenHelper {
         return langModelList;
     }
 
+    public boolean isItemFavourite(String itemId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String sql = "SELECT " + Favourite_Status + " FROM " + TableName + " WHERE " + Key_ID + " = ?";
+        Cursor cursor = db.rawQuery(sql, new String[]{itemId});
+
+        boolean isFavourite = false;
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                String favStatus = cursor.getString(cursor.getColumnIndex(Favourite_Status));
+                isFavourite = "1".equals(favStatus);
+            }
+            cursor.close();
+        }
+        return isFavourite;
+    }
+
     public void removeFav(String id) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "UPDATE " + TableName + " SET " + Favourite_Status + " = '0' WHERE " + Key_ID + " = '" + id + "'";

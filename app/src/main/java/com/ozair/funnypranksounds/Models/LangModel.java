@@ -27,10 +27,12 @@ public class LangModel {
         this.favStatus = favStatus;
     }
 
-    public LangModel(int categoryName, String emptyString,String category ) {
+
+    public LangModel(int categoryName,String category,String emptyString) {
+
+        this.categoryName = categoryName;
         this.category = category;
         EmptyString = emptyString;
-        this.categoryName = categoryName;
 
     }
 
@@ -45,6 +47,8 @@ public class LangModel {
     public LangModel() {
 
     }
+
+
 
     public  String getKey_Id() {
         return Key_Id;

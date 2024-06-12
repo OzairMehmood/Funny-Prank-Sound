@@ -1,4 +1,4 @@
-package com.ozair.funnypranksounds.Fragments.Adapters;
+package com.ozair.funnypranksounds.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -29,6 +29,7 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
     private final Context context;
     private static  List<LangModel> soundList;
     private static FvrtDB fvrtDB;
+    LangModel langModel;
 
     public SoundsAdapter(Context context, List<LangModel> soundList) {
         this.context = context;
@@ -50,7 +51,8 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SoundsAdapter.ViewHolder holder, int position) {
-        LangModel langModel = soundList.get(position);
+
+        langModel = soundList.get(position);
 
         String soundName= String.valueOf(langModel.getSoundname());
          holder.soundName.setText(soundName);
@@ -60,6 +62,8 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
                 .into(holder.imageViewCard);
 
         holder.playBtn.setOnClickListener(v -> {
+
+            langModel = soundList.get(position);
             Intent intent = new Intent(context, PlaySoundActivity.class);
             intent.putExtra("soundFile", langModel.getSoundsrc());
             intent.putExtra("position", position);
@@ -67,6 +71,7 @@ public class SoundsAdapter extends RecyclerView.Adapter<SoundsAdapter.ViewHolder
             intent.putExtra("soundname", langModel.getSoundname());
             intent.putExtra("keyId", langModel.getKey_Id());
             intent.putExtra("favStatus", langModel.getFavStatus());
+
             context.startActivity(intent);
         });
     }
