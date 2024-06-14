@@ -30,65 +30,13 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/moreappcard"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_below="@+id/toolbar"
-        android:layout_margin="20dp"
-        android:elevation="8dp"
-        android:visibility="visible"
-        app:cardCornerRadius="12dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/fontimg"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/moreapp">
-
-            </ImageView>
-
-            <ImageView
-                android:id="@+id/next"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="5dp"
-                android:src="@drawable/next">
-
-            </ImageView>
-
-            <TextView
-                android:id="@+id/Moreapp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_toStartOf="@+id/next"
-                android:layout_toEndOf="@+id/fontimg"
-                android:text="@string/more_app"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textStyle="bold">
-
-            </TextView>
-
-        </RelativeLayout>
-    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/RateMe"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_below="@+id/moreappcard"
+        android:layout_below="@+id/sharecard"
         android:layout_margin="20dp"
         android:elevation="8dp"
         android:visibility="visible"
@@ -142,7 +90,7 @@
         android:id="@+id/sharecard"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_below="@+id/RateMe"
+        android:layout_below="@+id/toolbar"
         android:layout_margin="20dp"
         android:elevation="8dp"
         android:visibility="visible"
@@ -250,7 +198,7 @@
         android:id="@+id/settingcard"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:layout_below="@+id/sharecard"
+        android:layout_below="@+id/RateMe"
         android:layout_margin="20dp"
         android:elevation="8dp"
         android:visibility="visible"

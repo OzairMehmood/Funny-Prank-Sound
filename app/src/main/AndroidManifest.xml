@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" tools:node="remove"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" tools:node="remove"/>
+
 
     <application
+        android:name="com.ozair.funnysounds.nativetemplates.MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/funnyicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/funnyicon"
         android:supportsRtl="true"
         android:theme="@style/Theme.FunnyPrankSounds"
         tools:targetApi="31">
+
+
         <activity
-            android:name=".Activities.CategoryListActivity"
+            android:name="com.ozair.funnysounds.Activities.PrivacyPoliecy"
             android:exported="false" />
         <activity
-            android:name=".Activities.PlaySoundActivity"
+            android:name="com.ozair.funnysounds.Activities.CategoryListActivity"
             android:exported="false" />
         <activity
-            android:name=".Activities.MainActivity"
+            android:name="com.ozair.funnysounds.Activities.PlaySoundActivity"
+            android:exported="false" />
+        <activity
+            android:name="com.ozair.funnysounds.Activities.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".Activities.SplashActivity"
+            android:name="com.ozair.funnysounds.Activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,8 +42,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.LanguageActivity"
+            android:name="com.ozair.funnysounds.Activities.LanguageActivity"
             android:exported="true" />
+        <activity android:name="com.ozair.funnysounds.nativetemplates.LoadAdsActivity">
+
+        </activity>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
     </application>
 
 </manifest>

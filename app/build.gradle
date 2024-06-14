@@ -3,16 +3,16 @@ plugins {
 }
 
 android {
-    namespace 'com.ozair.funnypranksounds'
+    namespace 'com.ArhamZeeApps.funnysounds'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.ozair.funnypranksounds"
+        applicationId "com.ArhamZeeApps.funnysounds"
         minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,7 +30,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
@@ -38,5 +38,39 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-    implementation "com.airbnb.android:lottie:5.0.2"
+    implementation "com.airbnb.android:lottie:6.1.0"
+   //implementation 'androidx.lifecycle:lifecycle-process:2.8.2'
+    implementation 'com.google.android.gms:play-services-ads:23.1.0'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    ///gdpr && app update
+    implementation 'com.google.android.ump:user-messaging-platform:2.2.0'
+    implementation 'com.google.android.play:app-update:2.1.0'
+    implementation("apero-inhouse:apero-ads:1.10.0-snapshot14"){
+        exclude group: 'com.appsflyer', module: 'adrevenue'
+        exclude group: 'com.appsflyer', module: 'af-android-sdk'
+
+        exclude group: 'com.applovin.mediation', module: 'bytedance-adapter'
+        exclude group: 'com.applovin.mediation', module: 'mintegral-adapter'
+        exclude group: 'com.applovin.mediation', module: 'adcolony-adapter'
+        exclude group: 'com.applovin.mediation', module: 'pangle'
+        exclude group: 'com.applovin.mediation', module: 'google-ad-manager-adapter'
+
+        exclude group: 'com.google.ads.mediation', module: 'mintegral'
+        exclude group: 'com.google.ads.mediation', module: 'adcolony'
+        exclude group: 'com.google.ads.mediation', module: 'applovin'
+        exclude group: 'com.google.ads.mediation', module: 'vungle'
+
+        exclude group: 'com.bigossp', module: 'max-mediation'
+        exclude group: 'com.bigossp', module: 'bigo-ads'
+
+
+        exclude group: 'com.squareup.okhttp3', module:  'logging-interceptor'
+
+        exclude group: 'com.pangle.global', module:  'ads-sdk'
+        exclude group: 'com.adcolony', module:  'sdk'
+        exclude group: 'com.vungle', module:  'vungle-ads'
+        exclude group: 'com.ironsource'
+    }
 }

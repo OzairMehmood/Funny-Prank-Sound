@@ -19,7 +19,9 @@
         android:id="@+id/nav"
         android:layout_alignParentBottom="true"
         android:layout_height="50dp"
-        android:layout_margin="10dp"
+       android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         app:cardElevation="6dp"
         app:cardCornerRadius="25dp">
         <com.google.android.material.bottomnavigation.BottomNavigationView
