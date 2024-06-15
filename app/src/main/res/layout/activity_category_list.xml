@@ -22,7 +22,7 @@
         android:layout_marginStart="14dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="24dp"
-        android:text="@string/prank_sounds"
+        android:text="@string/funny_sounds"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"

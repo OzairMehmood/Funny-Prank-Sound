@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.ArhamZeeApps.funnysounds.R;
 import com.ozair.funnysounds.Adapters.SoundsAdapter;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class CategoryListActivity extends AppCompatActivity {
     private SoundsAdapter soundsAdapter;
     private RecyclerView recyclerViewCourse;
+    TextView name;
     ArrayList<LangModel> soundlist = new ArrayList<>();
     @SuppressLint("MissingInflatedId")
     @Override
@@ -25,6 +27,8 @@ public class CategoryListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_list);
       String method= getIntent().getStringExtra("category");
+      name=findViewById(R.id.textView10);
+      name.setText(method);
 
         recyclerViewCourse = findViewById(R.id.categoryrec);
         recyclerViewCourse.setLayoutManager(new GridLayoutManager(this, 2));

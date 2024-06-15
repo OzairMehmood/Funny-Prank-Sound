@@ -31,7 +31,7 @@ public class SplashActivity extends AppCompatActivity {
                // intent = new Intent(this, MainActivity.class);
             } else {
                 appconstants.isSplashRecentlyShown=true;
-                AdsUtilize.getInstance().startLoadAdActivity(SplashActivity.this, MainActivity.class.getCanonicalName(), getResources().getString(R.string.intersitialSplash), null, 0);
+                AdsUtilize.getInstance().startLoadAdActivity(SplashActivity.this, LanguageActivity.class.getCanonicalName(), getResources().getString(R.string.intersitialSplash), null, 0);
 
                 //  intent = new Intent(this, LanguageActivity.class);
             }
