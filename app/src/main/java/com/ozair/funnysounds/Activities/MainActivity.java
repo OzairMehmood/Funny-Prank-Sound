@@ -13,6 +13,7 @@ import com.ozair.funnysounds.Fragments.NigerianFragment;
 import com.ozair.funnysounds.Fragments.PrankFragment;
 import com.ozair.funnysounds.Fragments.SettingFragment;
 
+import com.ozair.funnysounds.Tool;
 import com.ozair.funnysounds.Utilz.SharedPrefs;
 import com.ozair.funnysounds.Utilz.Utils;
 
@@ -65,5 +66,8 @@ public class MainActivity extends AppCompatActivity {
         transaction.addToBackStack(null);
         transaction.commit();
 
+    }
+    public void onBackPressed() {
+        Tool.showBottomSheetBanner(this);
     }
 }

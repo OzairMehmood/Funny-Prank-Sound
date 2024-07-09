@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--    <FrameLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginTop="12dp"
+            android:padding="5dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include
+                android:id="@+id/include3"
+                layout="@layout/layout_native_control" />
+        </FrameLayout>-->
+
+
+    <RelativeLayout
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_gravity="top"
+        android:layout_marginTop="12dp"
+        android:padding="5dp"
+        app:layout_constraintTop_toTopOf="parent"
+
+        >
+
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/layout_banner_control"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+
+            />
+
+        <!--   <include
+               android:id="@+id/include3"
+               layout="@layout/layout_native_control"
+               android:focusable="true"
+
+
+               />-->
+
+
+    </RelativeLayout>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardExit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
+        app:cardCornerRadius="@dimen/_16sdp"
+        app:cardElevation="@dimen/_6sdp"
+        app:layout_constraintTop_toBottomOf="@+id/layout">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginVertical="@dimen/_12sdp"
+            android:gravity="center"
+            android:text="Click to Exit"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_18sdp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_12sdp"
+        app:layout_constraintTop_toBottomOf="@+id/cardExit" />
+</androidx.constraintlayout.widget.ConstraintLayout>

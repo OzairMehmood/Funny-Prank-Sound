@@ -241,4 +241,10 @@ public class PlaySoundActivity extends AppCompatActivity {
         super.onResume();
         stopPlaying();
     }
+
+    @Override
+    public void onBackPressed() {
+        stopPlaying();
+        super.onBackPressed();
+    }
 }
